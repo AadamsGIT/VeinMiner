@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="mycanvas" width="128" height="128"></canvas>
+</body>
+</html>
+<style>
+    canvas{
+        border:1px solid #d3d3d3
+    }
+</style>
+<script>
+    const canvas = document.getElementById("mycanvas");
+    const context = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerWidth;
+    size = canvas.height/8
+    //classes
+    class unit{
+        constructor(x,y){
+            this.x = x;
+            this.y = y;
+        }
+        n = null;
+        e = null;
+        s = null;
+        w = null;
+        build(){
+            context.beginPath();
+            context.rect(this.x,this.y,size,size);
+            context.stroke();
+        }
+    }
+    var grid = [];
+    for(let i=0;i<8;i++){
+        grid[i] = [];
+        for(let j=0;j<8;j++){
+            grid[i][j] = new unit(i*size,j*size);
+            grid[i][j].build();
+        }
+    }
+</script>
