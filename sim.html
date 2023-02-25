@@ -20,13 +20,15 @@
     const context = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerWidth;
-    size = canvas.height/8
+    size = canvas.height/16
     //classes
     class unit{
         constructor(x,y){
             this.x = x;
             this.y = y;
         }
+        ipn = null;
+        jn = null;
         n = null;
         e = null;
         s = null;
@@ -35,13 +37,14 @@
             context.beginPath();
             context.rect(this.x,this.y,size,size);
             context.stroke();
+            context.font = "30px Arial";
         }
     }
     var grid = [];
-    for(let i=0;i<8;i++){
+    for(let i=0;i<16;i++){
         grid[i] = [];
-        for(let j=0;j<8;j++){
-            grid[i][j] = new unit(i*size,j*size);
+        for(let j=0;j<16;j++){
+            grid[i][j] = new unit(i*size,j*size,i,j);
             grid[i][j].build();
         }
     }
