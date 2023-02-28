@@ -20,15 +20,13 @@
     const context = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerWidth;
-    size = canvas.height/16
+    size = canvas.height/8
     //classes
     class unit{
         constructor(x,y){
             this.x = x;
             this.y = y;
         }
-        ipn = null;
-        jn = null;
         n = null;
         e = null;
         s = null;
@@ -37,15 +35,36 @@
             context.beginPath();
             context.rect(this.x,this.y,size,size);
             context.stroke();
-            context.font = "30px Arial";
         }
     }
     var grid = [];
-    for(let i=0;i<16;i++){
+    for(let i=0;i<8;i++){
         grid[i] = [];
-        for(let j=0;j<16;j++){
-            grid[i][j] = new unit(i*size,j*size,i,j);
+        for(let j=0;j<8;j++){
+            grid[i][j] = new unit(i*size,j*size); //create new object named array[x][y]
             grid[i][j].build();
+        }
+    }
+    //establish relationship between all the nodes
+    for(let i=0;i<8;i++){
+        grid[i] = [];
+        for(let j=0;j<8;j++){
+            //Establish North Node
+            if (i > 1){
+                grid[i][j].n = grid[i-1][j];
+            }
+            //Establish East Node
+            if (j < 8){
+                grid[i][j].e = grid[i][j+1];
+            }
+            //Establish South Node
+            if (j < 8){
+                grid[i][j].s = grid[i-1][j];
+            }
+            //Establish West Node
+            if (j < 8){
+                grid[i][j].w = grid[i][j-1];
+            }
         }
     }
 </script>
