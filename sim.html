@@ -12,14 +12,22 @@
 </html>
 <style>
     canvas{
-        border:1px solid #d3d3d3
+        border:1px solid #d3d3d3;
     }
 </style>
 <script>
     const canvas = document.getElementById("mycanvas");
     const context = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerWidth;
+    //scale canvas
+    if (window.innerHeight > window.innerWidth){
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerWidth;
+    }
+    else{
+        canvas.width = window.innerHeight;
+        canvas.height = window.innerHeight;
+    }
+
     size = canvas.height/8
     //classes
     class unit{
@@ -47,22 +55,21 @@
     }
     //establish relationship between all the nodes
     for(let i=0;i<8;i++){
-        grid[i] = [];
         for(let j=0;j<8;j++){
             //Establish North Node
-            if (i > 1){
+            if (i > 0){
                 grid[i][j].n = grid[i-1][j];
             }
             //Establish East Node
-            if (j < 8){
+            if (j < 7){
                 grid[i][j].e = grid[i][j+1];
             }
             //Establish South Node
-            if (j < 8){
+            if (i < 7){
                 grid[i][j].s = grid[i-1][j];
             }
             //Establish West Node
-            if (j < 8){
+            if (j > 0){
                 grid[i][j].w = grid[i][j-1];
             }
         }
